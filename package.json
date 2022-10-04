@@ -1,6 +1,6 @@
 {
-  "name": "@costs-organiser/maths-lib",
-  "version": "1.0.0",
+  "name": "@swietjak/maths-lib",
+  "version": "1.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {

@@ -1,4 +1,34 @@
-exports.lalolib = (function () {
+const {
+  glp_create_prob,
+  glp_set_obj_dir,
+  GLP_MIN,
+  glp_add_cols,
+  glp_add_rows,
+  glp_set_col_bnds,
+  GLP_LO,
+  glp_set_obj_coef,
+  glp_set_col_kind,
+  glp_set_row_bnds,
+  GLP_FX,
+  glp_set_mat_row,
+  SMCP,
+  GLP_ON,
+  glp_scale_prob,
+  GLP_SF_AUTO,
+  glp_simplex,
+  glp_get_col_prim,
+  glp_get_obj_val,
+  GLP_OPT,
+  GLP_FEAS,
+  GLP_INFEAS,
+  GLP_NOFEAS,
+  GLP_UNBND,
+  GLP_UNDEF,
+  glp_write_lp,
+  glp_get_status,
+} = require("./glpk");
+
+exports.lalolib = function () {
   var printPrecision = 3;
   var LALOLibPlotsIndex = 0;
   var LALOLibPlots = new Array();
@@ -32062,4 +32092,4 @@ exports.lalolib = (function () {
     steepestdescent: steepestdescent,
     bfgs: bfgs,
   };
-})();
+};
