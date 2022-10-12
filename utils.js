@@ -34,7 +34,7 @@ function vectorCopy(a) {
 
 const EPS = 2.2205e-16;
 
-export const mat = (elems, rowwise) => {
+module.exports.mat = (elems, rowwise) => {
   var k;
   var concatWithNumbers = false;
   var elemtypes = new Array(elems.length);
@@ -142,15 +142,15 @@ export const mat = (elems, rowwise) => {
   }
 };
 
-export const setVectorScalar = (A, rowsrange, B) => {
+const setVectorScalar = (A, rowsrange, B) => {
   var i;
   for (i = 0; i < rowsrange.length; i++) A[rowsrange[i]] = B;
 };
-export const setVectorVector = (A, rowsrange, B) => {
+const setVectorVector = (A, rowsrange, B) => {
   var i;
   for (i = 0; i < rowsrange.length; i++) A[rowsrange[i]] = B[i];
 };
-export const setMatrixScalar = (A, rowsrange, colsrange, B) => {
+const setMatrixScalar = (A, rowsrange, colsrange, B) => {
   var i;
   var j;
   var m = rowsrange.length;
@@ -158,7 +158,7 @@ export const setMatrixScalar = (A, rowsrange, colsrange, B) => {
   for (i = 0; i < m; i++)
     for (j = 0; j < n; j++) A.val[rowsrange[i] * A.n + colsrange[j]] = B;
 };
-export const setMatrixMatrix = (A, rowsrange, colsrange, B) => {
+const setMatrixMatrix = (A, rowsrange, colsrange, B) => {
   var i;
   var j;
   var m = rowsrange.length;
@@ -167,17 +167,17 @@ export const setMatrixMatrix = (A, rowsrange, colsrange, B) => {
     for (j = 0; j < n; j++)
       A.val[rowsrange[i] * A.n + colsrange[j]] = B.val[i * B.n + j];
 };
-export const setMatrixColVector = (A, rowsrange, col, B) => {
+const setMatrixColVector = (A, rowsrange, col, B) => {
   var i;
   var m = rowsrange.length;
   for (i = 0; i < m; i++) A.val[rowsrange[i] * A.n + col] = B[i];
 };
-export const setMatrixRowVector = (A, row, colsrange, B) => {
+const setMatrixRowVector = (A, row, colsrange, B) => {
   var j;
   var n = colsrange.length;
   for (j = 0; j < n; j++) A.val[row * A.n + colsrange[j]] = B[j];
 };
-export const setRows = (A, rowsrange, B) => {
+const setRows = (A, rowsrange, B) => {
   var i;
   var j;
   var m = rowsrange.length;
@@ -205,7 +205,7 @@ export const setRows = (A, rowsrange, B) => {
       break;
   }
 };
-export const setCols = (A, colsrange, B) => {
+const setCols = (A, colsrange, B) => {
   var i;
   var m = A.m;
   var n = colsrange.length;
@@ -232,7 +232,7 @@ export const setCols = (A, colsrange, B) => {
   }
 };
 
-export const set = (A, rowsrange, colsrange, B) => {
+module.exports.set = (A, rowsrange, colsrange, B) => {
   var i;
   var j;
   var k;
@@ -299,11 +299,11 @@ export const set = (A, rowsrange, colsrange, B) => {
   }
 };
 
-export const isZero = (x) => {
+module.exports.isZero = (x) => {
   return Math.abs(x) < EPS;
 };
 
-export const swaprows = (A, i, j) => {
+module.exports.swaprows = (A, i, j) => {
   if (i != j) {
     var ri = i * A.n;
     var rj = j * A.n;
@@ -313,7 +313,7 @@ export const swaprows = (A, i, j) => {
   }
 };
 
-export const ones = (rows, cols) => {
+module.exports.ones = (rows, cols) => {
   if (arguments.length == 1 || cols == 1) {
     var v = new Float64Array(rows);
     for (var i = 0; i < rows; i++) v[i] = 1;
@@ -327,14 +327,14 @@ export const ones = (rows, cols) => {
     return M;
   }
 };
-export const zeros = (rows, cols) => {
+module.exports.zeros = (rows, cols) => {
   if (arguments.length == 1 || cols == 1) {
     return new Float64Array(rows);
   } else {
     return new Matrix(rows, cols);
   }
 };
-export const eye = (m, n) => {
+module.exports.eye = (m, n) => {
   if (typeof n == "undefined") var n = m;
   if (m == 1 && n == 1) return 1;
   var I = zeros(m, n);
@@ -345,7 +345,17 @@ export const eye = (m, n) => {
   return I;
 };
 
-export const glp = (c, A, b, Aeq, beq, lb, ub, integer_variables, verbose) => {
+module.exports.glp = (
+  c,
+  A,
+  b,
+  Aeq,
+  beq,
+  lb,
+  ub,
+  integer_variables,
+  verbose
+) => {
   var prob = glp_create_prob();
   glp_set_obj_dir(prob, GLP_MIN);
   if (typeof Aeq == "undefined") var Aeq = [];
@@ -532,4 +542,4 @@ Matrix.prototype.toArrayOfFloat64Array = function () {
   return A;
 };
 
-export { Matrix };
+module.exports.Matrix = Matrix;
